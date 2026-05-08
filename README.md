@@ -23,9 +23,9 @@ An AI-powered F1 race engineer agent built with LangChain, Google Gemini, and La
 Before you start, you need:
 
 1. **Python 3.12** — [Download here](https://www.python.org/downloads/)
-2. **Google AI Studio API Key** — [Get it free here](https://aistudio.google.com/app/apikey) (Gemini access)
+2. **Google AI Studio API Key** — [Get here](https://aistudio.google.com/app/apikey) (Gemini access)
 3. **Telegram Bot Token** — from [@BotFather](https://t.me/BotFather) on Telegram (see below)
-4. **LangSmith API Key** — [Sign up free at smith.langchain.com](https://smith.langchain.com)
+4. **LangSmith API Key** — [Sign up at smith.langchain.com](https://smith.langchain.com)
 
 ---
 
