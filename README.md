@@ -84,7 +84,7 @@ Test the agent without Telegram — pure command-line Q&A:
 python agent.py
 ```
 
-You will see:
+You will see (incl. sample prompt and response):
 ```
 🏎️  F1 Race Strategy Agent — Terminal Mode
 Type your race situation and press Enter. Type 'quit' to exit.
