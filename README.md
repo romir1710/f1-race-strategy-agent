@@ -1,4 +1,4 @@
-# ☘️ F1 Race Strategy Agent
+# 🏎️ F1 Race Strategy Agent
 
 > An AI-powered F1 race engineer agent built with LangChain, Google Gemini, and LangSmith. Analyses live race situations and recommends pit strategies — just like a real race engineer on the radio.
 
@@ -6,7 +6,7 @@
 
 ---
 
-## 🏎️ Features
+## ⭐ Features
 
 - **4 Custom Agent Tools** — race situation snapshot, tyre degradation assessment, pit window calculator, and live DuckDuckGo F1 data search
 - **Google Gemini 2.5 Flash** — fast, accurate LLM reasoning (no OpenAI dependency)
