@@ -45,7 +45,7 @@ cd f1-race-strategy-agent
 cp .env.example .env
 ```
 
-Now open `.env` in any text editor and fill in your real API keys:
+Now open `.env` in any text editor and add your own API keys:
 
 ```
 GOOGLE_API_KEY=your-google-ai-studio-key-here
