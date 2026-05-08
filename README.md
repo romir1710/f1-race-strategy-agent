@@ -89,9 +89,9 @@ You will see:
 🏎️  F1 Race Strategy Agent — Terminal Mode
 Type your race situation and press Enter. Type 'quit' to exit.
 
-You: Should I pit now? I'm on lap 28 of 53 on mediums aged 22 laps.
+You: I am on 17 lap old softs, verstappen behind, closing in on me, despite being on similarly old tyres, this is lap 17/54, do i box?
 
-Adrian: [agent reasoning and recommendation here]
+Adrian: Your soft tyres are critically degraded. They are 17 laps old, past their cliff at 15 laps. There is a high risk of blowout or 2+ seconds lap time loss. Box this lap or risk an undercut to Verstappen who shall most likely also be coming in soon.
 ```
 
 Type `quit` to exit.
