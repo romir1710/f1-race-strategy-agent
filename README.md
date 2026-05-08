@@ -14,7 +14,7 @@ An AI-powered F1 race engineer agent built with LangChain, Google Gemini, and La
 - **Telegram Bot** — public bot powered by python-telegram-bot v20 (async)
 - **Rate Limiting** — 10 strategy calls per user per calendar day; resets automatically at midnight
 - **Terminal Mode** — run and test fully without Telegram via `python agent.py`
-- **Bono Personality** — calm, data-driven F1 race engineer persona baked into every response
+- **Adrian Personality** — calm, data-driven F1 race engineer persona baked into every response
 
 ---
 
