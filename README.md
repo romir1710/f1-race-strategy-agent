@@ -1,8 +1,7 @@
 # 🏎️ F1 Race Strategy Agent
 
-> An AI-powered F1 race engineer agent built with LangChain, Google Gemini, and LangSmith. Analyses live race situations and recommends pit strategies — just like a real race engineer on the radio.
+> An AI-powered F1 race engineer agent built with LangChain, Google Gemini, and LangSmith. Analyses live race situations and recommends pit strategies, just like a real race engineer on the radio.
 
-![Screenshot placeholder — add your own screenshot here]
 
 ---
 
