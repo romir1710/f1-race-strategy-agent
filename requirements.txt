@@ -1,0 +1,26 @@
+# requirements.txt — Python dependencies for the F1 Race Strategy Agent
+# Install all dependencies with: pip install -r requirements.txt
+
+# LangChain core framework
+langchain
+
+# Google Gemini integration for LangChain (replaces OpenAI)
+langchain-google-genai
+
+# Community integrations (includes DuckDuckGoSearchRun)
+langchain-community
+
+# Core LangChain primitives (tools, runnables, etc.)
+langchain-core
+
+# LangSmith: tracing, observability, and debugging for LangChain
+langsmith
+
+# Telegram bot framework (v20 = async, required for python-telegram-bot v20+)
+python-telegram-bot==20.7
+
+# Load .env file into environment variables
+python-dotenv
+
+# DuckDuckGo search (no API key needed)
+duckduckgo-search
