@@ -14,7 +14,7 @@
 - **Telegram Bot** — public bot powered by python-telegram-bot v20 (async)
 - **Rate Limiting** — 10 strategy calls per user per calendar day; resets automatically at midnight
 - **Terminal Mode** — run and test fully without Telegram via `python agent.py`
-- **Adrian Personality** — calm, data-driven F1 race engineer persona baked into every response
+- **Bono Personality** — calm, data-driven F1 race engineer persona baked into every response
 
 ---
 
@@ -153,9 +153,9 @@ f1-race-strategy-agent/
 
 ## 🛡️ Security
 
-- **Never commit your `.env` file** — it is listed in `.gitignore` and will not be pushed
-- The `.env.example` file contains only placeholder values and is safe to commit
-- API keys should never appear in your code — always load them from the environment
+- `.env` file is listed in `.gitignore` and will not be pushed
+- The `.env.example` file contains only placeholder values 
+- API keys are always to be loaded from the environment
 
 ---
 
