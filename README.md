@@ -39,9 +39,6 @@ An AI-powered F1 race engineer agent built with LangChain, Google Gemini, and La
    - 🟧 Orange — next-bank prediction impact
 
 ### Sample Terminal Output
-<p align="center">
-  <img src="./assets/sample-terminal-output.png" alt="Sample terminal output showing Adrian's race situation summary, tire status, prediction panel, and pit window advice" width="100%">
-</p>
 
 <pre>
 🏎️  F1 Race Strategy Agent — Terminal Mode
