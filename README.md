@@ -2,12 +2,14 @@
 
 An AI-powered F1 race engineer agent built with LangChain, Google Gemini, and LangSmith. Analyses live race situations and recommends pit strategies, just like a real race engineer on the radio.
 
-
 ---
 
 ## ⭐ Features
 
-- **4 Custom Agent Tools** — race situation snapshot, tyre degradation assessment, pit window calculator, and live DuckDuckGo F1 data search
+- **5 Custom Agent Tools** — race situation snapshot, tyre degradation assessment, pit window calculator, live DuckDuckGo F1 data search, and **tire telemetry status** (`check_tire_status`)
+- **Tire Telemetry Engine** — dummy telemetry service with realistic pressure, temperature, and life % metrics using revolution-based lifecycle tracking
+- **Exponential Degradation Prediction** — estimates next-bank impact and remaining tire laps using an exponential degradation curve
+- **Terminal Progress Bar** — colored ASCII bar: 🟩 consumed / 🟦 remaining / 🟧 next-bank prediction
 - **Google Gemini 2.5 Flash** — fast, accurate LLM reasoning (no OpenAI dependency)
 - **ReAct Agent** — step-by-step reasoning with tool calls via LangChain Hub prompt
 - **LangSmith Tracing** — full observability: every agent thought, tool call, and token logged
@@ -15,6 +17,62 @@ An AI-powered F1 race engineer agent built with LangChain, Google Gemini, and La
 - **Rate Limiting** — 10 strategy calls per user per calendar day; resets automatically at midnight
 - **Terminal Mode** — run and test fully without Telegram via `python agent.py`
 - **Adrian Personality** — calm, data-driven F1 race engineer persona baked into every response
+
+---
+
+## 🔧 How It Works
+
+### Tire Status Tool (`check_tire_status`)
+
+1. Agent receives a tire status query → calls `check_tire_status(compound, lap_age, circuit)`
+2. **Dummy telemetry service** (`tire_service.py`) generates realistic telemetry data:
+   - Pressure (PSI), temperature (°C)
+   - Life % = `current_revolutions / total_lifecycle_revolutions` (factoring in turns per lap at the given circuit)
+3. **Prediction engine** uses an exponential degradation curve to estimate:
+   - Next-bank impact (additional degradation %)
+   - Life remaining after next banking event
+   - Estimated tire laps left
+   - Risk level (LOW / MEDIUM / HIGH)
+4. **Progress bar** renders to terminal with colour-coded zones:
+   - 🟩 Green — consumed life
+   - ⬜ Grey — remaining life
+   - 🟧 Orange — next-bank prediction impact
+
+### Sample Terminal Output
+
+```
+🏎️  F1 Race Strategy Agent — Terminal Mode
+Type your race situation and press Enter. Type 'quit' to exit.
+
+You: What is the status of my 22 lap old mediums, here in silverstone?
+
+Adrian:
+  🏎️ TIRE STATUS — Medium | Lap Age: 22
+  ─────────────────────────────────────────────
+  Pressure:       20.4 PSI
+  Temperature:    111.1°C
+  Life Used:      89.5%
+  Revolutions:    64,801 / 72,393
+
+  0%      25%      50%      75%     100%    125%
+  |--------|--------|--------|--------|--------|
+  [████████████████████████░░░░░░░░░░░░▓]
+  consumed         remaining    next bank impact
+
+  🔮 PREDICTION — Next Bank Impact:
+  Additional degradation:  +0.08%
+  Life after next bank:    89.6%
+  Est. tire laps left:     2.3 laps
+  Risk level:              HIGH
+
+Your 22-lap old mediums at Silverstone show 89.5% life used. Pressure is 20.4 PSI,
+temperature 111.1°C. Risk is HIGH. You have approximately 2.3 laps remaining.
+
+You: Is the pit window open? Can i box and stay ahead of sainz?
+
+Adrian: The pit window is tight. You are 25.2 seconds short of a safe margin to Sainz.
+Risk of undercut is high.
+```
 
 ---
 
@@ -141,7 +199,8 @@ LangSmith tracing is enabled automatically when `LANGSMITH_TRACING=true` and `LA
 ```
 f1-race-strategy-agent/
 ├── agent.py          # Core LangChain ReAct agent logic
-├── tools.py          # 4 @tool decorated functions
+├── tools.py          # 5 @tool decorated functions (incl. check_tire_status)
+├── tire_service.py   # Dummy telemetry service + exponential degradation engine
 ├── bot.py            # Telegram bot wrapper (async, python-telegram-bot v20)
 ├── requirements.txt  # All Python dependencies
 ├── .env.example      # Template for API keys (copy to .env)
@@ -168,6 +227,7 @@ f1-race-strategy-agent/
 | Agent Framework | LangChain (ReAct) |
 | Gemini Integration | langchain-google-genai |
 | Web Search Tool | DuckDuckGoSearchRun (langchain-community) |
+| Tire Telemetry | Custom dummy service (`tire_service.py`) |
 | Observability | LangSmith |
 | Telegram Bot | python-telegram-bot 20.7 |
 | Config | python-dotenv |
