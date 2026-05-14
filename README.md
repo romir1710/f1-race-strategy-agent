@@ -40,39 +40,46 @@ An AI-powered F1 race engineer agent built with LangChain, Google Gemini, and La
 
 ### Sample Terminal Output
 
-```
+<pre>
 🏎️  F1 Race Strategy Agent — Terminal Mode
 Type your race situation and press Enter. Type 'quit' to exit.
 
-You: What is the status of my 22 lap old mediums, here in silverstone?
+<b>You:</b> What is our current situation?
 
-Adrian:
-  🏎️ TIRE STATUS — Medium | Lap Age: 22
+<b>Adrian:</b> We are on lap 28 of 53, in P3. We are on medium tyres, 22 laps old.
+Gap to Verstappen in P2 is +4.2s. Sainz in P4 is 1.8s behind and closing.
+Weather is dry, track temperature 38 degrees C.
+
+<b>You:</b> What is the status of my 22 lap old mediums, here in silverstone?
+
+<b>Adrian:</b>
+  🏎️  TIRE STATUS — Medium | Lap Age: 22
   ─────────────────────────────────────────────
   Pressure:       20.4 PSI
   Temperature:    111.1°C
-  Life Used:      89.5%
+  Life Used:      <b>89.5%</b>
   Revolutions:    64,801 / 72,393
 
   0%      25%      50%      75%     100%    125%
   |--------|--------|--------|--------|--------|
-  [████████████████████████░░░░░░░░░░░░▓]
-  consumed         remaining    next bank impact
+  <span style="background-color:#2d7a2d;color:#fff;padding:0 2px">█████████████████████████</span><span style="background-color:#555;color:#ccc;padding:0 2px">█████████████</span><span style="background-color:#c87000;color:#fff;padding:0 2px">█</span>|
 
-  🔮 PREDICTION — Next Bank Impact:
-  Additional degradation:  +0.08%
+  <span style="color:#4caf50">■ consumed</span>    <span style="color:#9e9e9e">■ remaining</span>    <span style="color:#ff9800">■ next bank impact</span>
+
+  🔮 <b>PREDICTION — Next Bank Impact:</b>
+  Additional degradation:  <span style="color:#ff9800"><b>+0.08%</b></span>
   Life after next bank:    89.6%
-  Est. tire laps left:     2.3 laps
-  Risk level:              HIGH
+  Est. tire laps left:     <b>2.3 laps</b>
+  Risk level:              <span style="color:#ff5722"><b>HIGH</b></span>
 
 Your 22-lap old mediums at Silverstone show 89.5% life used. Pressure is 20.4 PSI,
 temperature 111.1°C. Risk is HIGH. You have approximately 2.3 laps remaining.
 
-You: Is the pit window open? Can i box and stay ahead of sainz?
+<b>You:</b> Is the pit window open? Can i box and stay ahead of sainz?
 
-Adrian: The pit window is tight. You are 25.2 seconds short of a safe margin to Sainz.
-Risk of undercut is high.
-```
+<b>Adrian:</b> The pit window is tight. You are 25.2 seconds short of a safe margin
+to Sainz. Risk of undercut is high.
+</pre>
 
 ---
 
