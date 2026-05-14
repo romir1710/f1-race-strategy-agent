@@ -19,6 +19,7 @@ from tools import (
     get_tyre_degradation,
     calculate_pit_window,
     search_f1_data,
+    check_tire_status,
 )
 
 # ---------------------------------------------------------------------------
@@ -40,6 +41,7 @@ tools = [
     get_tyre_degradation,
     calculate_pit_window,
     search_f1_data,
+    check_tire_status,
 ]
 
 # ---------------------------------------------------------------------------

@@ -4,6 +4,13 @@
 from langchain_core.tools import tool          # Decorator to register a function as a LangChain tool
 from langchain_community.tools import DuckDuckGoSearchRun  # Web search via DuckDuckGo (no API key needed)
 
+# Tire telemetry service, prediction engine, and terminal bar renderer
+from tire_service import (
+    get_tire_telemetry_data,
+    predict_tire_degradation,
+    render_tire_life_bar,
+)
+
 # ---------------------------------------------------------------------------
 # Tool 1: get_race_situation
 # Returns hardcoded snapshot of the current race state.
@@ -133,3 +140,51 @@ def search_f1_data(query: str) -> str:
     # Run the search and return the top results as a string
     results = search.run(query)
     return results
+
+
+# ---------------------------------------------------------------------------
+# Tool 5: check_tire_status
+# Pulls live telemetry from the dummy tyre service, runs the prediction engine,
+# and renders a colored progress bar in the terminal.
+# ---------------------------------------------------------------------------
+@tool
+def check_tire_status(compound: str, lap_age: int, circuit: str = "") -> str:
+    """Checks the current tyre status including pressure, temperature, and
+    percentage of tyre life consumed. Also predicts additional degradation if
+    the car takes the next bank/turn and shows a visual progress bar.
+    compound must be 'soft', 'medium', or 'hard'. circuit is optional
+    (e.g. 'silverstone', 'monaco', 'spa')."""
+
+    compound = compound.lower().strip()
+    if compound not in ("soft", "medium", "hard"):
+        return f"Unknown compound '{compound}'. Please specify 'soft', 'medium', or 'hard'."
+
+    # Step 1 — Pull dummy telemetry data from onboard sensors
+    telemetry = get_tire_telemetry_data(compound, lap_age, circuit)
+
+    # Step 2 — Run prediction engine for next-bank degradation estimate
+    prediction = predict_tire_degradation(telemetry)
+
+    # Step 3 — Render the colored progress bar to the terminal (side effect)
+    render_tire_life_bar(telemetry, prediction)
+
+    # Step 4 — Build a text summary to return to the agent
+    summary = (
+        f"Tire Status Report:\n"
+        f"  Compound: {telemetry['compound']}\n"
+        f"  Lap Age: {telemetry['lap_age']} laps\n"
+        f"  Circuit: {telemetry['circuit']}\n"
+        f"  Turns/Lap: {telemetry['turns_per_lap']}\n"
+        f"  Pressure: {telemetry['pressure_psi']} PSI\n"
+        f"  Temperature: {telemetry['temperature_c']}°C\n"
+        f"  Life Used: {telemetry['life_pct_used']}%\n"
+        f"  Revolutions: {telemetry['current_revolutions']:,} / "
+        f"{telemetry['total_lifecycle_revolutions']:,}\n"
+        f"\n"
+        f"Prediction — Next Bank Impact:\n"
+        f"  Additional degradation: +{prediction['predicted_next_bank_pct']}%\n"
+        f"  Life after next bank: {prediction['life_pct_after_bank']}%\n"
+        f"  Estimated tire laps remaining: {prediction['laps_remaining_in_tire']} laps\n"
+        f"  Risk level: {prediction['risk_level']}"
+    )
+    return summary
