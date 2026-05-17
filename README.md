@@ -242,3 +242,12 @@ f1-race-strategy-agent/
 ---
 
 *Built with ❤️ for F1 fans and AI engineers.*
+
+
+---
+
+## ⚖️ License
+
+This project is open source under the [MIT License](LICENSE).
+
+B
